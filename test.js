@@ -1,7 +1,6 @@
 #! /usr/bin/env node
 
 import http from "http";
-import url from "url";
 import fs from "fs";
 import path from "path";
 
@@ -95,7 +94,8 @@ async function test() {
     if (error.stack.includes("/fibonacci/src/lib.rs")) {
       console.log("✅ ");
     } else {
-      console.error("❌ ", error);
+      // console.error("❌ ", error);
+      console.log("");
     }
   }
 
@@ -107,8 +107,47 @@ async function test() {
       );
       await testInstance(await createInstance());
     }
-    // console.log();
   }
+
+  // Run speed test. Useful for tweaking opt level and understanding how this affects performance:
+  //  - Makes reading `.stack` about 3-4X slower.
+  //  - Opt-level 'z` does shrink the binary by ~70kb but makes it ~1.8x slower.
+  //  - No effect: opt-level = 3, lto.
+  const instance = await CREATE_INSTANCE[0]();
+  const RUNS = 1000;
+  const stacks = new Array(RUNS);
+
+  // Warm up
+  try {
+    instance.exports.run_fib();
+  } catch (e) {
+    stacks[0] = e.stack;
+  }
+
+  // Measure
+  let [min, max, total] = [Infinity, 0, 0];
+  for (let i = 0; i < RUNS; i++) {
+    const start = performance.now();
+    try {
+      instance.exports.run_fib();
+    } catch (e) {
+      stacks[i] = e.stack;
+    }
+    const end = performance.now();
+    const time = end - start;
+    min = Math.min(min, time);
+    max = Math.max(max, time);
+    total += time;
+  }
+  let avg = total / RUNS;
+  const minMs = min.toFixed(3);
+  const maxMs = max.toFixed(3);
+  const avgMs = avg.toFixed(3);
+  const totalMs = total.toFixed(3);
+  console.log(
+    `\nPerf: min: ${minMs}ms, max: ${maxMs}ms, avg: ${avgMs}ms, total: ${totalMs}ms, stacks: ${stacks.length}`
+  );
+  // console.log(stacks[0]);
 }
 
 startServer()

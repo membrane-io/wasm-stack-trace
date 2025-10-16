@@ -1,7 +1,7 @@
 {
-  "name": "wasm-symbolicator",
+  "name": "wasm-stack-trace",
   "version": "0.1.0",
-  "description": "Wasm stack traces that are actually helpful. Uses DWARF data to symbolicate stack traces.",
+  "description": "Wasm stack traces with demangled symbols and file/line/column information. Uses DWARF data to symbolicate stack traces.",
   "keywords": [
     "wasm",
     "WebAssembly",
@@ -12,13 +12,13 @@
     "DWARF",
     "debugging"
   ],
-  "homepage": "https://github.com/membrane-io/wasm-symbolicator#readme",
+  "homepage": "https://github.com/membrane-io/wasm-stack-trace#readme",
   "bugs": {
-    "url": "https://github.com/membrane-io/wasm-symbolicator/issues"
+    "url": "https://github.com/membrane-io/wasm-stack-trace/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/membrane-io/wasm-symbolicator.git"
+    "url": "git+https://github.com/membrane-io/wasm-stack-trace.git"
   },
   "license": "ISC",
   "author": "Juan Campa",
