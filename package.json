@@ -1,0 +1,31 @@
+{
+  "name": "wasm-symbolicator",
+  "version": "0.1.0",
+  "description": "Wasm stack traces that are actually helpful. Uses DWARF data to symbolicate stack traces.",
+  "keywords": [
+    "wasm",
+    "WebAssembly",
+    "backtrace",
+    "callstack",
+    "stack trace",
+    "symbols",
+    "DWARF",
+    "debugging"
+  ],
+  "homepage": "https://github.com/membrane-io/wasm-symbolicator#readme",
+  "bugs": {
+    "url": "https://github.com/membrane-io/wasm-symbolicator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/membrane-io/wasm-symbolicator.git"
+  },
+  "license": "ISC",
+  "author": "Juan Campa",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "pushd fibonacci && cargo build && popd && node test.js",
+    "build": "node build.js"
+  }
+}
