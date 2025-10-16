@@ -1,7 +1,7 @@
 {
-  "name": "wasm-stack-trace",
-  "version": "0.1.0",
-  "description": "Wasm stack traces with demangled symbols and file/line/column information. Uses DWARF data to symbolicate stack traces.",
+  "name": "@membrane/wasm-stack-trace",
+  "version": "0.1.1",
+  "description": "Enhance `Error.stack` with wasm demangled symbols and file/line/column information. Uses DWARF data to symbolicate stack traces.",
   "keywords": [
     "wasm",
     "WebAssembly",
@@ -23,7 +23,10 @@
   "license": "ISC",
   "author": "Juan Campa",
   "type": "module",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "./dist"
+  ],
   "scripts": {
     "test": "pushd fibonacci && cargo build && popd && node test.js",
     "build": "node build.js"

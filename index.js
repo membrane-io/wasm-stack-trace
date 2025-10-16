@@ -1,7 +1,5 @@
-#! /usr/bin/env node
-
-// Increase callstack. The default of 10 is mostly useless
-Error.stackTraceLimit = 100;
+// Increase stack trace limit. The default of 10 is typically useless in wasm applications
+Error.stackTraceLimit = 128;
 
 /**
  * Sets up all the machinery so that callstacks in errors have demangled symbols and actual

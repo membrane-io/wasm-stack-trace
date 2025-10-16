@@ -4,11 +4,29 @@ Wasm stack trace symbolication using embedded DWARF data. Works in the browser a
 
 ## How to use
 
+Place one of these `script` tags before any script that loads webassembly and you should be good to
+go. The scripts are ~138kb gziped, including the embedded wasm that we use for DWARF processing.
+
+Option 1. Link to the **current version** and use `integrity` for extra peace of mind
+
 ```
- // TODO
+<script src="https://cdn.jsdelivr.net/npm/@membrane/wasm-stack-trace@0.1.1/dist/index.js" integrity="sha256-4ven6yDmBLbFNTJ3e+BT6LHZgVL9XbXNKYDUhAa/S0Y=" crossorigin="anonymous"></script>
 ```
 
-Make sure you include _some_ debug data in your wasm. In rust, you can use one of these options:
+Option 2. Link to the **latest version** so it's always up-to-date
+
+```
+<script src="https://cdn.jsdelivr.net/npm/@membrane/wasm-stack-trace@latest"></script>
+```
+
+Option 3. Download [the latest version](https://cdn.jsdelivr.net/npm/@membrane/wasm-stack-trace@latest) and self host it.
+
+## Cargo setup
+
+For symbolication to be possible, the right debug data needs to be included in your .wasm, so make
+sure you configure cargo correctly. The default configuration for debug builds can easily turn a
+10MB .wasm into 100MB or more which is often annoying. Instead, consider adding this to your
+`Cargo.toml` to trim it down while keeping the data needed for proper stack traces:
 
 ```toml
 [profile.dev]
@@ -22,7 +40,7 @@ debug = 2                      # Default for "dev". Includes info on variables a
                                # recommended unless you plan to attach a debugger.
 ```
 
-You can use these in `[profile.release]` if you prefer.
+I also recommend using `opt-level=1` in debug builds, but that depends on your specific use case. The higher the `opt-level`, the more your call will get inlined potentially reducing the fidelity of the stack traces.
 
 ## How does it work?
 
