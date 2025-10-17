@@ -1,6 +1,8 @@
-# wasm-symbolicator
+# wasm-stack trace
 
 Wasm stack trace symbolication using embedded DWARF data. Works in the browser and node.js
+
+![Banner](banner.png)
 
 ## How to use
 
@@ -20,6 +22,8 @@ Option 2. Link to the **latest version** so it's always up-to-date
 ```
 
 Option 3. Download [the latest version](https://cdn.jsdelivr.net/npm/@membrane/wasm-stack-trace@latest) and self host it.
+
+Option 4. Build it yourself (`npm run build`)
 
 ## Cargo setup
 
@@ -68,3 +72,8 @@ I also recommend using `opt-level=1` in debug builds, but that depends on your s
 - Not yet tested with languages other than Rust (should work for C++ by enabling the right cargo feature)
 - Not yet tested on Firefox
 - Not yet tested on Safari
+
+## Alternatives
+
+- Some tools can generate sourcemaps from DWARF data which can achieve a similar result. However, adding the sourcemap step to your development cycle can consume significant amount of time since all symbols will be processed eagerly. This approach keeps your build-test cycles very fast.
+- Chrome has a [DevTools extension with DWARF support](https://chromewebstore.google.com/detail/cc++-devtools-support-dwa/pdcpmagijalfljmkmjngeonclgbbannb) which might help if you want the full debugger experience. In our experience, it doesn't work very well with Rust though.
