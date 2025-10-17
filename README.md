@@ -1,4 +1,4 @@
-# wasm-stack trace
+# wasm-stack-trace
 
 Wasm stack trace symbolication using embedded DWARF data. Works in the browser and node.js
 
